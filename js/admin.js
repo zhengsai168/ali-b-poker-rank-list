@@ -107,6 +107,15 @@ function getToken() {
     return localStorage.getItem('poker_gh_token');
 }
 
+// 根据 token 格式自动选择认证头
+function authHeader(token) {
+    // Fine-grained tokens 以 github_pat_ 开头，需要用 Bearer
+    if (token.startsWith('github_pat_')) {
+        return `Bearer ${token}`;
+    }
+    return `token ${token}`;
+}
+
 // ==================== 数据操作 ====================
 async function loadGameData() {
     try {
@@ -232,7 +241,7 @@ async function saveToGitHub() {
         // 1. 获取当前文件的 SHA（用于更新）
         const getResp = await fetch(
             `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${CONFIG.dataPath}?ref=${CONFIG.branch}`,
-            { headers: { 'Authorization': `token ${token}` } }
+            { headers: { 'Authorization': authHeader(token) } }
         );
 
         let sha = null;
@@ -255,7 +264,7 @@ async function saveToGitHub() {
             {
                 method: 'PUT',
                 headers: {
-                    'Authorization': `token ${token}`,
+                    'Authorization': authHeader(token),
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(body)
