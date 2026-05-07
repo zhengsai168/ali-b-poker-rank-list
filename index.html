@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ali-B 德州扑克积分榜</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>♠ Ali-B 德州扑克积分榜 ♣</h1>
+            <nav>
+                <button class="nav-btn active" data-view="leaderboard">排行榜</button>
+                <button class="nav-btn" data-view="history">历史对局</button>
+                <button class="nav-btn" data-view="stats">数据统计</button>
+            </nav>
+        </header>
+
+        <!-- 排行榜 -->
+        <section id="leaderboard" class="view active">
+            <div class="section-header">
+                <h2>总积分排行</h2>
+                <span class="game-count" id="totalGames"></span>
+            </div>
+            <div class="table-wrapper">
+                <table id="rankTable">
+                    <thead>
+                        <tr>
+                            <th>排名</th>
+                            <th>玩家</th>
+                            <th>总积分</th>
+                            <th>参与局数</th>
+                            <th>胜率</th>
+                            <th>最高单局</th>
+                            <th>最低单局</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- 历史对局 -->
+        <section id="history" class="view">
+            <div class="section-header">
+                <h2>历史对局记录</h2>
+            </div>
+            <div id="historyList" class="history-list"></div>
+        </section>
+
+        <!-- 数据统计 -->
+        <section id="stats" class="view">
+            <div class="section-header">
+                <h2>数据统计</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>连胜纪录</h3>
+                    <div id="streakStats" class="stat-content"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>单局之最</h3>
+                    <div id="extremeStats" class="stat-content"></div>
+                </div>
+                <div class="stat-card">
+                    <h3>场均积分</h3>
+                    <div id="avgStats" class="stat-content"></div>
+                </div>
+                <div class="stat-card full-width">
+                    <h3>积分趋势</h3>
+                    <canvas id="trendChart"></canvas>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
